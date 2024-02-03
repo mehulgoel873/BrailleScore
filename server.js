@@ -38,6 +38,17 @@ const upload = multer({
   },
 });
 
+app.get('/TXT',function(req,res) {
+  console.log('single file');
+   
+  // Download function provided by express
+  res.download('/Users/mehulgoel/Documents/BrailleScore/BRL/image_brl.txt', function(err) {
+      if(err) {
+          console.log(err);
+      }
+  })
+})
+
 // Serve the HTML page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
