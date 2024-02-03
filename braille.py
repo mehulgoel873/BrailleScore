@@ -2,21 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 # from pynput.keyboard import Key,Controller
 import time
+import sys
+
 
 # Specify the path to the webdriver executable (e.g., chromedriver.exe)
 # webdriver_path = 'chromedriver-mac-arm64'
 
 def musicthings(filename):
+    print(filename)
     # Create a new instance of the Chrome browser
     options = webdriver.ChromeOptions()
+    outputFileName = "/".join(filename.split("/")[:-1]).replace("XML", "BRL")
 
-<<<<<<< HEAD
-    prefs = {"download.default_directory" : "/Users/mehulgoel/Documents/BrailleScore/BRL"}
+    prefs = {"download.default_directory" : outputFileName}
     options.add_experimental_option("prefs",prefs)
-=======
-prefs = {"download.default_directory" : "/Users/utsav/Desktop/BrailleAppcopy/BRL"}
-options.add_experimental_option("prefs",prefs)
->>>>>>> 9f0f509 (Co-authored-by: Mehul Goel <mehulgoel873@users.noreply.github.com>)
 
     driver = webdriver.Chrome(options=options)  
 
@@ -50,14 +49,16 @@ options.add_experimental_option("prefs",prefs)
     submit_button_id = 'submit'
     submit_button = driver.find_element("xpath", "//input[@type='submit']").click()
 
-    # time.sleep(5)
+    time.sleep(1)
 
     download_button = driver.find_element("xpath", "//input[@type='submit' and @value='Download']")
     download_button.click()
 
-    time.sleep(30)
+    # time.sleep(30)
 
     # Close the browser window
     driver.quit()
 
-musicthings('/Users/utsav/Downloads/twinkle.musicxml')
+
+
+musicthings(sys.argv[1])
