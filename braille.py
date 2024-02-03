@@ -10,8 +10,13 @@ def musicthings(filename):
     # Create a new instance of the Chrome browser
     options = webdriver.ChromeOptions()
 
+<<<<<<< HEAD
     prefs = {"download.default_directory" : "/Users/mehulgoel/Documents/BrailleScore/BRL"}
     options.add_experimental_option("prefs",prefs)
+=======
+prefs = {"download.default_directory" : "/Users/utsav/Desktop/BrailleAppcopy/BRL"}
+options.add_experimental_option("prefs",prefs)
+>>>>>>> 9f0f509 (Co-authored-by: Mehul Goel <mehulgoel873@users.noreply.github.com>)
 
     driver = webdriver.Chrome(options=options)  
 

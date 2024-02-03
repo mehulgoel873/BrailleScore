@@ -22,9 +22,12 @@
 // runPython.js
 
 const { spawn } = require('child_process');
+const getCmdArgs = () => process.argv.slice(2);
+const filename = getCmdArgs()[0];
+console.log(filename);
 
 // Define the command to execute the Python script with arguments
-const pythonProcess = spawn('python', ['braille.py', "twinkle.musicxml"]);
+const pythonProcess = spawn('python3', ['braille.py', filename]);
 
 // Listen for data returned from the Python script
 pythonProcess.stdout.on('data', (data) => {
