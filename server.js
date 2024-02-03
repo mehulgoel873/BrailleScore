@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const port = 3008;
+const port = 3009;
 var xml = "";
 var txt = "";
 
@@ -86,6 +86,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
     //const fileContent = fs.readFileSync(filePath, 'utf-8');
     //console.log(`File content: ${fileContent}`);
     console.log('dddd');
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    sleep(10000);
     exec('node TheShit.js ' + filePath, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing TheShit.js: ${error}`);
