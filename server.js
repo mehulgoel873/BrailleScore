@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const port = 3002;
+const port = 3005;
 
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
@@ -51,12 +51,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
     console.log('File path:', filePath);
 
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    console.log(`File content: ${fileContent}`);
+    //console.log(`File content: ${fileContent}`);
 
-    res.json({ success: true, message: 'File uploaded and processed successfully!', fileContent });
+    //res.json({ success: true, message: 'File uploaded and processed successfullyyy!', fileContent });
   } catch (error) {
     console.error('Error processing file:', error.message);
-    res.status(500).json({ success: false, message: 'Error processing file: ' + error.message });
+    //res.status(500).json({ success: false, message: 'Error processing file: ' + error.message });
   }
 });
 
