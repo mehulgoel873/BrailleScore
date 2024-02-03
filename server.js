@@ -6,6 +6,8 @@ const fs = require('fs');
 
 const app = express();
 const port = 3007;
+const xml = "";
+const txt = "";
 
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
