@@ -28,7 +28,7 @@ function uploadFile() {
         })
         .catch(error => {
             uploadStatus.innerHTML = 'Error uploading file!';
-            console.error('Error:', error);
+            console.error('Error:', error); 
         });
     } else {
         uploadStatus.innerHTML = 'Error: Upload a file first.';
