@@ -10,7 +10,7 @@ function uploadFile() {
         var file = fileInput.files[0];
         var formData = new FormData();
 
-        formData.append('file', file);
+        formData.append('file', file); 
 
         fetch('http://localhost:3008', {
             method: 'POST',
