@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style> .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +35,14 @@
         </form>
 
         <div id="uploadStatus" style="margin-top: 20px; text-align: center;"></div>
+        <p style="text-align: center; margin-top: 20px;">Welcome to BrailleScore! To begin, please upload a png, pdf, or docx file and wait approximately 3 minutes for our server to convert it to braille. Enjoy!</p>
+
+        <div class="loader"></div>
+
+        
+
     </div>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>

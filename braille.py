@@ -54,7 +54,7 @@ def musicthings(filename):
     download_button = driver.find_element("xpath", "//input[@type='submit' and @value='Download']")
     download_button.click()
 
-    # time.sleep(30)
+    time.sleep(2)
 
     # Close the browser window
     driver.quit()

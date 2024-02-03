@@ -1,10 +1,6 @@
 const { exec } = require('child_process');
 
 // Define the shell command
-const command = 'oemer ./uploads/sheetmusic.png';
-
-// Execute the shell command
-exec(command, (error, stdout, stderr) => {
 const path = require('path');
 const getCmdArgs = () => process.argv.slice(2);
 console.log("Calling Oemer");
@@ -19,6 +15,7 @@ const outputFile = path.dirname(filename.replace("PNG", "XML"));
 console.log(outputFile);
 postProcessing(filename);
 const command = 'oemer ' + filename + " -o" + outputFile;
+// const command = 'echo oemer';
 exec(command, (error, stdout, stderr) => {
   console.log("Wassup bro");
   if (error) {
@@ -29,9 +26,6 @@ exec(command, (error, stdout, stderr) => {
   console.log(`stdout: ${stdout}`);
   console.error(`stderr: ${stderr}`);
 }); 
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
 
 function postProcessing(filename) {
   resultArray = filename.split("/");

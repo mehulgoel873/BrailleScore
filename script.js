@@ -12,7 +12,7 @@ function uploadFile() {
 
         formData.append('file', file);
 
-        fetch('http://localhost:3007/upload', {
+        fetch('http://localhost:3008', {
             method: 'POST',
             body: formData,
         })
@@ -33,4 +33,4 @@ function uploadFile() {
     } else {
         uploadStatus.innerHTML = 'Error: Upload a file first.';
     }
-}
+} 

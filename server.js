@@ -5,9 +5,9 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const port = 3007;
-const xml = "";
-const txt = "";
+const port = 3008;
+var xml = "";
+var txt = "";
 
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
@@ -41,14 +41,30 @@ const upload = multer({
 });
 
 app.get('/TXT',function(req,res) {
-  console.log('single file');
+  console.log('TXT File Download');
+  if (txt != "") {
+    // Download function provided by express
+    res.download(txt, function(err) {
+        if(err) {
+            console.log(err);
+        }
+    })
+  }
+  console.log(txt);
+})
+
+app.get('/XML',function(req,res) {
+  console.log('XML file download');
    
   // Download function provided by express
-  res.download('/Users/mehulgoel/Documents/BrailleScore/BRL/image_brl.txt', function(err) {
-      if(err) {
-          console.log(err);
-      }
-  })
+  if (xml != "") {
+    res.download(xml, function(err) {
+        if(err) {
+            console.log(err);
+        }
+    })
+  }
+  console.log(xml);
 })
 
 // Serve the HTML page
@@ -87,15 +103,16 @@ app.post('/upload', upload.single('file'), (req, res) => {
       const outputFilePath = filePath.replace("PNG", "XML").replace(".png", ".musicxml");
       console.log("\n");
       console.log(outputFilePath);
+      xml = outputFilePath;
       exec('node hi.js ' + outputFilePath, (error, stdout, stderr) => {
         if (error) {
           console.error(`Error executing hi.js: ${error}`);
           return res.status(500).json({ success: false, message: 'Error executing hi.js.' });
         }
-  
+        txt = xml.replace("XML", "BRL").replace(".musicxml", "_brl.txt");
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
-        res.json({ success: true, message: 'File uploaded and processed successfully!' });
+        //res.json({ success: true, message: 'File uploaded and processed successfully!' });
       });
     }
     
@@ -104,6 +121,9 @@ app.post('/upload', upload.single('file'), (req, res) => {
   
   catch (error) {
     console.error('Error processing file:', error.message);
+    var error = "Error processing file: " + error.message
+    // res.send(<script>alert("You need to upload a correct error!"); window.location.href = "/page_location"; </script>);
+    // alert("'Error processing fileefef: ' + error.message ");
     res.status(500).json({ success: false, message: 'Error processing fileefef: ' + error.message });
   }
 });
