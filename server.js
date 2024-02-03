@@ -1,10 +1,11 @@
 const express = require('express');
+const {spawn} = require('child_process')
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const port = 3005;
+const port = 62919;
 
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
@@ -35,11 +36,23 @@ const upload = multer({
   },
 });
 
-// Serve the HTML page
 app.get('/', (req, res) => {
+  var dataToSend = '';
+  const python = spawn('python3', ['braille.py']);
+  python.stdout.on('data', function (data) {
+    console.log('Pipe data from python script ...');
+    dataToSend += data.toString();  // Concatenate data to handle multiple chunks
+  });
+
+  python.on('close', (code) => {
+    console.log(`child process close all stdio with code ${code}`);
+    // send data to browser
+    res.send(dataToSend);
+  });
+
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-
+app.listen(port, () => console.log('Example app listening on port ${port}!)'))
 // Handle file upload
 app.post('/upload', upload.single('file'), (req, res) => {
   try {

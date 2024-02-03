@@ -36,3 +36,12 @@ pythonProcess.stdout.on('data', (data) => {
 pythonProcess.stderr.on('data', (data) => {
     console.error(`Error from Python script: ${data}`);
 });
+
+// Handle process exit
+pythonProcess.on('exit', (code) => {
+    if (code !== 0) {
+        console.error(`Python script exited with code ${code}`);
+    } else {
+        console.log('Python script executed successfully');
+    }
+});
